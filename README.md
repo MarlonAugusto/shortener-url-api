@@ -1,12 +1,12 @@
-# 📌 URL Shortener API
+# URL Shortener API
 
 API para encurtamento de URLs com autenticação JWT.
 
-## 📖 Sobre o Projeto
+## Sobre o Projeto
 
 Esta API permite que os usuários encurtem URLs, gerenciem suas URLs encurtadas e rastreiem cliques. Usuários autenticados podem gerenciar suas URLs com operações de CRUD.
 
-## 🚀 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **NestJS** como framework principal
 - **TypeORM** para gerenciamento do banco de dados
