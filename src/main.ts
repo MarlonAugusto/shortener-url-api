@@ -11,7 +11,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   app.use(cookieParser());
-
+  app.setGlobalPrefix('api', {
+    exclude: ['/:shortUrl'],
+  });
   const swaggerDocument = yaml.load(readFileSync(resolve(__dirname, '../api-spec.yaml'), 'utf8'));
   SwaggerModule.setup('docs', app, swaggerDocument);
 
