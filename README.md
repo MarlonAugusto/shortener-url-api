@@ -28,19 +28,7 @@ Esta API permite que os usuários encurtem URLs, gerenciem suas URLs encurtadas 
 
 ### 2️ - **Configurar Variáveis de Ambiente**
 
-Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
-
-```env
-# Configuração do Banco de Dados
-DB_HOST=localhost
-DB_PORT=5433
-DB_USERNAME=admin
-DB_PASSWORD=123456
-DB_NAME=shortener_url
-
-# Configuração do JWT
-JWT_SECRET=500e10a99806c402a4dd3cccd2a288c13d29eb90065ab676e62d43779bfbf8c42a606783cd679c8b9f60ebc268758292645c07dac8734dcb64af9236a18a959d
-```
+Apague o nome do arquivo `development.env` para ficar com o nome `.env` na raiz do projeto, ele é o environment do sistema.
 
 ### 3️ - **Instalar Dependências**
 
