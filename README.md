@@ -33,7 +33,7 @@ Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
 ```env
 # Configuração do Banco de Dados
 DB_HOST=database
-DB_PORT=5432
+DB_PORT=5433
 DB_USERNAME=admin
 DB_PASSWORD=123456
 DB_NAME=shortener_url
