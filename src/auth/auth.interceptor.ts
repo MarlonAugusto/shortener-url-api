@@ -9,15 +9,14 @@ export class AuthInterceptor implements NestInterceptor {
   ) { }
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request = context.switchToHttp().getRequest();
+
     try {
       const jwt = request.cookies['jwt'];
-
-      if (!this.jwtService.verify(jwt)) {
-        throw new UnauthorizedException();
-      }
+      this.jwtService.verify(jwt);
+     
+      return next.handle();
     } catch (e) {
       throw new UnauthorizedException();
     }
-    return next.handle();
   }
 }
