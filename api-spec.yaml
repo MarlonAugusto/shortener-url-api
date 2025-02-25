@@ -8,12 +8,12 @@ servers:
     description: Servidor local
 
 paths:
-  /sign-in:
+  /auth/register:
     post:
       summary: Registro de usuário
       description: Registra um novo usuário
       tags:
-        - Auth
+        - Authentication
       requestBody:
         required: true
         content:
@@ -23,10 +23,10 @@ paths:
               properties:
                 name:
                   type: string
-                  example: "Silvio Santos"
+                  example: "Swagger teste"
                 email:
                   type: string
-                  example: "silvio.santos@gmail.com"
+                  example: "swaggerteste@gmail.com"
                 password:
                   type: string
                   example: "123456"
@@ -39,12 +39,12 @@ paths:
         "400":
           description: Erro na validação
 
-  /login:
+  /auth/login:
     post:
       summary: Login de usuário
       description: Realiza login e retorna um token JWT
       tags:
-        - Auth
+        - Authentication
       requestBody:
         required: true
         content:
@@ -54,7 +54,7 @@ paths:
               properties:
                 email:
                   type: string
-                  example: "silvio.santos@gmail.com"
+                  example: "swaggerteste@gmail.com"
                 password:
                   type: string
                   example: "123456"
@@ -64,12 +64,24 @@ paths:
         "401":
           description: Credenciais inválidas
 
-  /user-info:
+  /auth/logout:
+    post:
+      summary: Logout do usuário
+      description: Limpa o cookie JWT para deslogar o usuário.
+      tags:
+        - Authentication
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Logout realizado com sucesso
+
+  /user/info:
     get:
       summary: Obter informações do usuário autenticado
       description: Retorna os dados do usuário autenticado com base no token JWT.
       tags:
-        - Auth
+        - User
       security:
         - BearerAuth: []
       responses:
@@ -77,20 +89,8 @@ paths:
           description: Retorna os dados do usuário
         "401":
           description: Não autenticado
-  
-  /logout:
-    post:
-      summary: Logout do usuário
-      description: Limpa o cookie JWT para deslogar o usuário.
-      tags:
-        - Auth
-      security:
-        - BearerAuth: []
-      responses:
-        "200":
-          description: Logout realizado com sucesso
 
-  /short-url:
+  /short/url:
     post:
       summary: Encurtar URL
       description: Encurta uma URL. Usuários autenticados terão a URL associada à sua conta.
@@ -126,7 +126,7 @@ paths:
         "401":
           description: Não autenticado
 
-  /short-url/{id}:
+  /short/url/{id}:
     put:
       summary: Atualizar URL encurtada
       description: Permite que um usuário autenticado edite o link original de uma URL encurtada.
@@ -175,6 +175,46 @@ paths:
           description: URL excluída com sucesso
         "404":
           description: URL não encontrada
+    get:
+      summary: "Obter detalhes de uma URL encurtada"
+      description: "Retorna os detalhes de uma URL encurtada específica do usuário autenticado."
+      tags:
+        - URL Shortener
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "ID da URL encurtada"
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: "Detalhes da URL encurtada"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  originalUrl:
+                    type: string
+                  shortUrl:
+                    type: string
+                  clicks:
+                    type: integer
+                  createdAt:
+                    type: string
+                    format: date-time
+                  modifiedAt:
+                    type: string
+                    format: date-time
+        "404":
+          description: "URL não encontrada ou não pertence ao usuário"
+        "401":
+          description: "Usuário não autenticado"
 
 components:
   securitySchemes:
