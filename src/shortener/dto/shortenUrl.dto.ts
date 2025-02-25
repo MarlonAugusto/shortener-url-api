@@ -6,5 +6,5 @@ export class ShortenUrlDTO {
     originalUrl: string;
 
     @IsOptional()
-    userId: number;
+    userId?: number;
 }
