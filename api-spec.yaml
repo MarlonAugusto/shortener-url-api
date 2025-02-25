@@ -181,7 +181,7 @@ paths:
       tags:
         - URL Shortener
       security:
-        - bearerAuth: []
+        - BearerAuth: []
       parameters:
         - name: id
           in: path
