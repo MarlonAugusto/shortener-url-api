@@ -21,8 +21,7 @@ export class AuthController {
             }
             return await this.authService.createUser(body)
         } catch (error) {
-            console.error("Error in register:", error);
-            throw new HttpException(error.message || "Error during registration", error.status || HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new BadRequestException(error.message);
         }
     }
 
@@ -39,8 +38,7 @@ export class AuthController {
 
             return { message: "Login successful", user };
         } catch (error) {
-            console.error("Error in login:", error);
-            throw new HttpException(error.message || "Error during registration", error.status || HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new BadRequestException(error.message);
         }
 
     }
